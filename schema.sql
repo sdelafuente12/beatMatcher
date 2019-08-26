@@ -7,7 +7,7 @@ USE test;
 
 
 -- this table used to have items instead of news
-CREATE TABLE news (
+CREATE TABLE items (
   id int NOT NULL AUTO_INCREMENT,
   quantity integer NOT NULL,
   description varchar(50) NOT NULL,

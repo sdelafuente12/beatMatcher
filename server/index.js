@@ -12,6 +12,8 @@ app.use(express.static(path.join(__dirname, '../react-client/dist')));
 // app.use(express.static(path.join(__dirname, '../angular-client')));
 // app.use(express.static(path.join(__dirname, '../node_modules')));
 
+// this endpoint was '/items' before its was '/news'
+
 app.get('/items', (req, res) => {
   items.selectAll((err, data) => {
     if (err) {
