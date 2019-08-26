@@ -4,9 +4,9 @@ const bodyParser = require('body-parser');
 const items = require('../database-mysql');
 
 const app = express();
-
+app.use(bodyParser.json());
 // UNCOMMENT FOR REACT
-// app.use(express.static(path.join(__dirname, '../react-client/dist')));
+app.use(express.static(path.join(__dirname, '../react-client/dist')));
 
 // UNCOMMENT FOR ANGULAR
 // app.use(express.static(path.join(__dirname, '../angular-client')));
@@ -23,5 +23,5 @@ app.get('/items', (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log('listening on port 3000!');
+  console.log('Hey! Im listening on port 3000!');
 });
