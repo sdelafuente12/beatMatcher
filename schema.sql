@@ -14,26 +14,6 @@ CREATE TABLE items (
   PRIMARY KEY (ID)
 );
 
-CREATE TABLE jokes (
-  id int NOT NULL AUTO_INCREMENT,
-  quantity integer NOT NULL,
-  description varchar(50) NOT NULL,
-  PRIMARY KEY (ID)
-);
-
-CREATE TABLE pickups (
-  id int NOT NULL AUTO_INCREMENT,
-  quantity integer NOT NULL,
-  description varchar(50) NOT NULL,
-  PRIMARY KEY (ID)
-);
-
-CREATE TABLE facts (
-  id int NOT NULL AUTO_INCREMENT,
-  quantity integer NOT NULL,
-  description varchar(50) NOT NULL,
-  PRIMARY KEY (ID)
-);
 
 
 /*  Execute this file from the command line by typing:
