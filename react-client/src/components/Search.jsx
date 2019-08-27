@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// import axios from 'axios';
 
 class Search extends React.Component {
   constructor(props) {
@@ -7,10 +8,18 @@ class Search extends React.Component {
 
     this.state = {
       track: '',
+
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    // this.getTrack = this.getTrack.bind(this);
   }
+
+
+  // onSearch(track) {
+  //   axios.post(`htttp://localhost:3000/track/?track=${track}`)
+  //     .then(response => response.data);
+  // }
 
   handleChange(e) {
     this.setState({
@@ -18,19 +27,12 @@ class Search extends React.Component {
     });
   }
 
-  onSearch(track) {
-    axios.post(`htttp://localhost:3000/track/?track=${track}`)
-      .then(response => response.data);
-  }
-
-
-
 
   handleClick() {
-    const { onSearch } = this.props;
+    const { getTrack } = this.props;
     const { track } = this.state;
 
-    onSearch(track);
+    getTrack(track);
   }
 
   render() {
@@ -47,7 +49,7 @@ class Search extends React.Component {
 }
 
 Search.propTypes = {
-  onSearch: PropTypes.func.isRequired,
+  getTrack: PropTypes.func.isRequired,
 };
 
 export default Search;

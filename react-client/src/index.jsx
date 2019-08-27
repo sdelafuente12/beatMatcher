@@ -10,21 +10,14 @@ class App extends React.Component {
     super(props);
     this.state = {
       items: [],
-
+      matchingTracks: [],
     };
     this.getItem = this.getItem.bind(this);
+    this.getTrack = this.getTrack.bind(this);
   }
 
   componentDidMount() {
-    this.getItem()
-      .then((data) => {
-        this.setState({
-          items: data,
-        });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    this.getTrack();
   }
 
 
@@ -33,15 +26,30 @@ class App extends React.Component {
       .then(response => response.data);
   }
 
+  getTrack(track) {
+    axios.get('/track', {
+      params: {
+        track,
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        this.setState({
+          matchingTracks: response.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   render() {
-    // const { items } = this.state;
-
+    // const { items } = this.state;g
     return (
       <div>
         <div>
           <h1>Beat Matcher</h1>
-          <Search onSearch={this.getItem} />
+          <Search getTrack={this.getTrack} />
         </div>
       </div>
     );
