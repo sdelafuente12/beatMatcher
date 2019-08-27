@@ -24,6 +24,10 @@ app.get('/items', (req, res) => {
   });
 });
 
+app.post('/track', (req, res) =>{
+  console.log(req);
+});
+
 app.listen(3000, () => {
   console.log('Hey! Im listening on port 3000!');
 });

@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import Search from './components/Search.jsx'
+import Search from './components/Search.jsx';
 
-import List from './components/List.jsx';
+// import List from './components/List.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -27,21 +27,21 @@ class App extends React.Component {
       });
   }
 
+
   getItem() {
-    return axios.get('items')
+    return axios.get('/items')
       .then(response => response.data);
   }
 
 
-
   render() {
-    const { items } = this.state;
+    // const { items } = this.state;
 
     return (
       <div>
         <div>
           <h1>Beat Matcher</h1>
-          <Search onSearch={this.handleSearch} />
+          <Search onSearch={this.getItem} />
         </div>
       </div>
     );

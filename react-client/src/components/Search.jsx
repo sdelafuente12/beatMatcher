@@ -18,6 +18,14 @@ class Search extends React.Component {
     });
   }
 
+  onSearch(track) {
+    axios.post(`htttp://localhost:3000/track/?track=${track}`)
+      .then(response => response.data);
+  }
+
+
+
+
   handleClick() {
     const { onSearch } = this.props;
     const { track } = this.state;
