@@ -12,7 +12,6 @@ class Search extends React.Component {
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    // this.getTrack = this.getTrack.bind(this);
   }
 
 

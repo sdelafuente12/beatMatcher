@@ -15,12 +15,8 @@ const getBPM = id => axios.get(`https://api.getsongbpm.com/song/?api_key=${GETSO
 const getMatchingBPM = bpm => axios.get(`https://api.getsongbpm.com/tempo/?api_key=${GETSONGBPM_TOKEN}&bpm=${bpm}`);
 
 const getSongInfo = track => axios.get(`https://api.getsongbpm.com/search/?api_key=${GETSONGBPM_TOKEN}&type=song&lookup=${track}`)
-  .then((response) => {
-    return getBPM(response.data.search[0].id);
-  })
-  .then((res) => {
-    return getMatchingBPM(res.data.song.tempo);
-  })
+  .then(response => getBPM(response.data.search[0].id))
+  .then(res => getMatchingBPM(res.data.song.tempo))
   .then((rezzy) => {
     console.log(rezzy.data.tempo);
   });
@@ -31,7 +27,10 @@ app.post('/track', (req, res) => {
     .then(() => {
       res.sendStatus(200);
     })
-    .catch(error => console.log(`THIS IS A GET ERROR${error}`));
+    .catch((error) => {
+      res.sendStatus(500);
+      console.log(`THIS IS A GET ERROR${error}`);
+    });
 });
 
 
