@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Search from './components/Search.jsx';
 
-// import List from './components/List.jsx';
+import List from './components/List.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -29,8 +29,9 @@ class App extends React.Component {
   getTrack(track) {
     axios.post('/track', { track })
       .then((rezo) => {
+        console.log(rezo);
         this.setState({
-          matchingTracks: rezo,
+          matchingTracks: rezo.data,
         });
       })
       .catch((error) => {
@@ -45,9 +46,7 @@ class App extends React.Component {
         <div>
           <h1>Beat Matcher</h1>
           <Search getTrack={this.getTrack} />
-          <div>
-            <h1>{matchingTracks}</h1>
-          </div>
+          <List matchingTracks={matchingTracks} />
         </div>
       </div>
     );

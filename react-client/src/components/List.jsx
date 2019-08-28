@@ -4,21 +4,21 @@ import PropTypes from 'prop-types';
 import ListItem from './ListItem.jsx';
 
 
-// const List = ({ items }) => (
-const List = ({ items }) => (
+// const List = ({ matchingTracks }) => (
+const List = ({ matchingTracks }) => (
   <div>
-    <h4> List Component </h4>
-    There are { items.length } items.
-    { items.map(item => <ListItem item={item} />)}
+    <h4> YR MATCHES!! </h4>
+    There are { matchingTracks.length } matchingTracks.
+    { matchingTracks.map(track => <ListItem track={track} />)}
   </div>
 );
 //
 // TODO ^^ COME BACK TO THAT MAP
 
-List.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.shape({
-    // TODO
-  })).isRequired,
-};
+// List.propTypes = {
+//   matchingTracks: PropTypes.arrayOf(PropTypes.shape({
+//     // TODO
+//   })).isRequired,
+// };
 
 export default List;

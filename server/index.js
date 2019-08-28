@@ -25,13 +25,12 @@ const getSongInfo = track => axios.get(`https://api.getsongbpm.com/search/?api_k
 app.post('/track', (req, res) => {
   getSongInfo(req.body.track)
     .then((rezo) => {
-      console.log(rezo);
       res.send(rezo);
       // res.sendStatus(200);
     })
     .catch((error) => {
       res.sendStatus(500);
-      console.log(`THIS IS A GET ERROR${error}`);
+      console.log(`app.post err${error.text}`);
     });
 });
 
