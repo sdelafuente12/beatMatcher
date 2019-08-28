@@ -3,16 +3,12 @@ import PropTypes from 'prop-types';
 
 const ListItem = ({ track }) => (
   <div>
-    { track.song_title }
-    { track.artist.name }
-    { track.album.title }
+    <h1>{track.song_title}</h1>
+    <h2>{track.artist.name}</h2>
+    <h3>{track.album.title}</h3>
     <img src={track.album.img} />
-
   </div>
-  // song_title
-  // artist.name
-  // album.title
-  // album.img
+
 );
 
 ListItem.propTypes = {

@@ -42,7 +42,6 @@ class Search extends React.Component {
         <h4>Find yr rythmn!</h4>
         Search a track: <input value={track} onChange={this.handleChange} />
         <button onClick={this.handleClick} type="button">search</button>
-        <h3>test</h3>
       </div>
     );
   }
