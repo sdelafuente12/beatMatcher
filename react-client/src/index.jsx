@@ -12,7 +12,7 @@ class App extends React.Component {
       items: [],
       matchingTracks: [],
     };
-    this.getItem = this.getItem.bind(this);
+    // this.getItem = this.getItem.bind(this);
     this.getTrack = this.getTrack.bind(this);
   }
 
@@ -21,10 +21,10 @@ class App extends React.Component {
   }
 
 
-  getItem() {
-    return axios.get('/items')
-      .then(response => response.data);
-  }
+  // getItem() {
+  //   return axios.get('/items')
+  //     .then(response => response.data);
+  // }
 
   getTrack(track) {
     axios.post('/track', { track })

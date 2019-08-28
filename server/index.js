@@ -10,6 +10,35 @@ app.use(bodyParser.json());
 // UNCOMMENT FOR REACT
 app.use(express.static(path.join(__dirname, '../react-client/dist')));
 
+
+const getBPM = id => axios.get(`https://api.getsongbpm.com/song/?api_key=${GETSONGBPM_TOKEN}&id=${id}`);
+const getMatchingBPM = bpm => axios.get(`https://api.getsongbpm.com/tempo/?api_key=${GETSONGBPM_TOKEN}&bpm=${bpm}`);
+
+const getSongInfo = track => axios.get(`https://api.getsongbpm.com/search/?api_key=${GETSONGBPM_TOKEN}&type=song&lookup=${track}`)
+  .then((response) => {
+    return getBPM(response.data.search[0].id);
+  })
+  .then((res) => {
+    return getMatchingBPM(res.data.song.tempo);
+  })
+  .then((rezzy) => {
+    console.log(rezzy.data.tempo);
+  });
+
+
+app.post('/track', (req, res) => {
+  getSongInfo(req.body.track)
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch(error => console.log(`THIS IS A GET ERROR${error}`));
+});
+
+
+app.listen(3000, () => {
+  console.log('Hey! Im listening on port 3000!');
+});
+
 // UNCOMMENT FOR ANGULAR
 // app.use(express.static(path.join(__dirname, '../angular-client')));
 // app.use(express.static(path.join(__dirname, '../node_modules')));
@@ -27,40 +56,3 @@ app.use(express.static(path.join(__dirname, '../react-client/dist')));
 // });
 // `https://api.getsongbpm.com/song/?api_key=60d1a06cbf35562b0214875e2519c6b6&id=${id}`
 // `https://api.getsongbpm.com/tempo/?api_key=60d1a06cbf35562b0214875e2519c6b6&bpm=${bpm}`
-const getBPM = id => axios.get(`https://api.getsongbpm.com/song/?api_key=${GETSONGBPM_TOKEN}&id=${id}`);
-const getMatchingBPM = bpm => axios.get(`https://api.getsongbpm.com/tempo/?api_key=${GETSONGBPM_TOKEN}&bpm=${bpm}`);
-
-const getSongInfo = track => axios.get(`https://api.getsongbpm.com/search/?api_key=${GETSONGBPM_TOKEN}&type=song&lookup=${track}`)
-  .then((response) => {
-    return getBPM(response.data.search[0].id);
-  })
-  .then((res) => {
-    return getMatchingBPM(res.data.song.tempo);
-  })
-  .then((rezzy) => {
-    console.log(rezzy.data.tempo);
-  });
-
-
-// const getMatchingBPM(bpm) {
-//   const options = {
-//     url: `https://api.getsongbpm.com/tempo/?api_key=60d1a06cbf35562b0214875e2519c6b6&bpm=${bpm}`,
-//     headers: {
-//       'User-Agent': 'request',
-//       Authorization: `token ${config.GETSONGBPM_TOKEN}`,
-//     },
-//   }
-//   return axios.get(options.url, options);
-// }
-app.post('/track', (req, res) => {
-  getSongInfo(req.body.track)
-    .then(() => {
-      res.sendStatus(200);
-    })
-    .catch(error => console.log(`THIS IS A GET ERROR${error}`));
-});
-
-
-app.listen(3000, () => {
-  console.log('Hey! Im listening on port 3000!');
-});
