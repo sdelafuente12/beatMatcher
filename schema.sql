@@ -14,7 +14,7 @@ CREATE TABLE items (
   PRIMARY KEY (ID)
 );
 
-
+CRea
 
 /*  Execute this file from the command line by typing:
  *    mysql -u root < server/schema.sql

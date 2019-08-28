@@ -42,11 +42,13 @@ class Search extends React.Component {
       <div>
         <h4>Find yr rythmn!</h4>
         Search a track: <input value={track} onChange={this.handleChange} />
-        <button onClick={this.handleClick} type="button">search</button>
+        <button onClick={() => this.handleClick()} type="button">search</button>
       </div>
     );
   }
 }
+
+//
 
 Search.propTypes = {
   getTrack: PropTypes.func.isRequired,

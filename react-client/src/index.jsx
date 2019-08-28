@@ -17,7 +17,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getTrack();
+    // this.getTrack();
   }
 
 
@@ -27,17 +27,12 @@ class App extends React.Component {
   }
 
   getTrack(track) {
-    axios.get('/track', {
-      params: {
-        track,
-      },
-    })
-      .then((response) => {
-        console.log(response);
-        this.setState({
-          matchingTracks: response.data,
-        });
-      })
+    axios.post('/track', { track })
+      // .then(
+      //   this.setState({
+      //     matchingTracks: tr
+      //   })
+      // )
       .catch((error) => {
         console.log(error);
       });
