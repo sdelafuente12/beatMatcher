@@ -18,14 +18,16 @@ const getSongInfo = track => axios.get(`https://api.getsongbpm.com/search/?api_k
   .then(response => getBPM(response.data.search[0].id))
   .then(res => getMatchingBPM(res.data.song.tempo))
   .then((rezzy) => {
-    console.log(rezzy.data.tempo);
+    return rezzy.data.tempo.slice(0, 10);
   });
 
 
 app.post('/track', (req, res) => {
   getSongInfo(req.body.track)
-    .then(() => {
-      res.sendStatus(200);
+    .then((rezo) => {
+      console.log(rezo);
+      res.send(rezo);
+      // res.sendStatus(200);
     })
     .catch((error) => {
       res.sendStatus(500);

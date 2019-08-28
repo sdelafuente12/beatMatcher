@@ -28,23 +28,26 @@ class App extends React.Component {
 
   getTrack(track) {
     axios.post('/track', { track })
-      // .then(
-      //   this.setState({
-      //     matchingTracks: tr
-      //   })
-      // )
+      .then((rezo) => {
+        this.setState({
+          matchingTracks: rezo,
+        });
+      })
       .catch((error) => {
         console.log(error);
       });
   }
 
   render() {
-    // const { items } = this.state;g
+    const { matchingTracks } = this.state;
     return (
       <div>
         <div>
           <h1>Beat Matcher</h1>
           <Search getTrack={this.getTrack} />
+          <div>
+            <h1>{matchingTracks}</h1>
+          </div>
         </div>
       </div>
     );
