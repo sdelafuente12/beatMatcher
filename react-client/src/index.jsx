@@ -21,12 +21,10 @@ class App extends React.Component {
     axios.get('/top5')
       .then((response) => {
         this.setState({
-          top5: response.data,
+          top5: response.data.slice(-5),
         });
       });
   }
-
-
   // getItem() {
   //   return axios.get('/items')
   //     .then(response => response.data);
