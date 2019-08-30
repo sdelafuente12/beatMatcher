@@ -1,20 +1,19 @@
-DROP DATABASE IF EXISTS test;
+DROP DATABASE IF EXISTS beatMatcher;
 
-CREATE DATABASE test;
+CREATE DATABASE beatMatcher;
 
-USE test;
+USE beatMatcher;
 
 
 
 -- this table used to have items instead of news
-CREATE TABLE items (
-  id int NOT NULL AUTO_INCREMENT,
-  quantity integer NOT NULL,
-  description varchar(50) NOT NULL,
-  PRIMARY KEY (ID)
+CREATE TABLE songsSearched (
+  ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(50) NOT NULL,
+  artist VARCHAR(50) NOT NULL
 );
 
-CRea
+
 
 /*  Execute this file from the command line by typing:
  *    mysql -u root < server/schema.sql
