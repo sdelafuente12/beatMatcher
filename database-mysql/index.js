@@ -3,19 +3,33 @@ const mysql = require('mysql');
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'FILL_ME_IN',
-  database: 'test',
+  password: '',
+  database: 'beatMatcher',
 });
 
-const selectAll = (callback) => {
-  // connection.query('SELECT * FROM items', (err, items) => {
-  connection.query('SELECT * FROM items', (err, items) => {
+
+const selectTopFive = (callback) => {
+  connection.query('SELECT * FROM songsSearched', (err, songsSearched) => {
     if (err) {
       callback(err, null);
     } else {
-      callback(null, items);
+      console.log(songsSearched);
+      callback(null, songsSearched);
     }
   });
 };
 
-module.exports.selectAll = selectAll;
+const insertSongs = (songToInsert) => {
+  connection.query('INSERT INTO songsSearched (ID, title, artist) VALUES (DEFAULT, ?, ?)',
+    songToInsert, (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('song Saved!');
+        console.log(results);
+      }
+    });
+};
+
+module.exports.selectTopFive = selectTopFive;
+module.exports.insertSongs = insertSongs;
