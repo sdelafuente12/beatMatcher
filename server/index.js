@@ -3,7 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const axios = require('axios');
 const { GETSONGBPM_TOKEN } = require('./config');
-// const items = require('../database-mysql');
+const { insertSongs, selectTopFive } = require('../database-mysql/index.js');
 
 const app = express();
 app.use(bodyParser.json());
@@ -15,11 +15,14 @@ const getBPM = id => axios.get(`https://api.getsongbpm.com/song/?api_key=${GETSO
 const getMatchingBPM = bpm => axios.get(`https://api.getsongbpm.com/tempo/?api_key=${GETSONGBPM_TOKEN}&bpm=${bpm}`);
 
 const getSongInfo = track => axios.get(`https://api.getsongbpm.com/search/?api_key=${GETSONGBPM_TOKEN}&type=song&lookup=${track}`)
-  .then(response => getBPM(response.data.search[0].id))
+  .then((response) => {
+    const { title } = response.data.search[0];
+    const artist = response.data.search[0].artist.name;
+    insertSongs([title, artist]);
+    return getBPM(response.data.search[0].id);
+  })
   .then(res => getMatchingBPM(res.data.song.tempo))
-  .then((rezzy) => {
-    return rezzy.data.tempo.slice(0, 10);
-  });
+  .then(rezzy => rezzy.data.tempo.slice(0, 10));
 
 
 app.post('/track', (req, res) => {
@@ -32,6 +35,17 @@ app.post('/track', (req, res) => {
       res.sendStatus(500);
       console.log(`app.post err${error.text}`);
     });
+});
+
+app.get('/top5', (req, res) => {
+  selectTopFive((error, result) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('top5 retrieved');
+      res.send(result.slice(-5));
+    }
+  });
 });
 
 
