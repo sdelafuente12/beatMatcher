@@ -11,13 +11,19 @@ class App extends React.Component {
     this.state = {
       // items: [],
       matchingTracks: [],
+      top5: [],
     };
     // this.getItem = this.getItem.bind(this);
     this.getTrack = this.getTrack.bind(this);
   }
 
   componentDidMount() {
-    // this.getTrack();
+    axios.get('/top5')
+      .then((response) => {
+        this.setState({
+          top5: response.data,
+        });
+      });
   }
 
 
@@ -40,13 +46,13 @@ class App extends React.Component {
   }
 
   render() {
-    const { matchingTracks } = this.state;
+    const { matchingTracks, top5 } = this.state;
     return (
       <div>
         <div>
           <h1>Beat Matcher</h1>
           <Search getTrack={this.getTrack} />
-          <List matchingTracks={matchingTracks} />
+          <List matchingTracks={matchingTracks} top5={top5} />
         </div>
       </div>
     );
